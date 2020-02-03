@@ -13,6 +13,9 @@ private:
 public:
 	Solver();
 	void basicSolve(); //checks all possible numbers a location can have. if it's only 1, then it will use that
+	int emptySlotsInBox(int, int);
+	int emptySlotsInRow(int);
+	int emptySlotsInColumn(int);
 	bool canItBeThisNumber(int, int, int);
 	bool doesBoxHaveNumber(int, int, int); //working
 	bool doesRowHaveNumber(int, int); //working

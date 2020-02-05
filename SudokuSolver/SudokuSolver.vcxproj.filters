@@ -26,15 +26,15 @@
     <Text Include="testFile1.txt">
       <Filter>Source Files</Filter>
     </Text>
-    <Text Include="..\testFile2.txt">
+    <Text Include="testFile2.txt">
       <Filter>Source Files</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Solver.h">
+    <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
+    <ClInclude Include="Solver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

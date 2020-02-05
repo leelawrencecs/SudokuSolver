@@ -151,8 +151,8 @@
     <ClCompile Include="SudokuSolver.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\testFile2.txt" />
     <Text Include="testFile1.txt" />
+    <Text Include="testFile2.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />

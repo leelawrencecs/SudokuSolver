@@ -7,15 +7,17 @@ using namespace std;
 
 int main()
 {
-	//needs something to check if file even exists
 
-	string sudokuPuzzleFileName = "testFile4.txt";
+	string sudokuPuzzleFileName = "testFile5.txt";
 	
 	Solver test;
 	test.addBoard(sudokuPuzzleFileName);
 	test.displayBoard();
-	test.solve();
+	test.solverLoop();
 	test.displayBoard();
+	test.displayAllPossibleValuesFromAllValues();
+	test.getNumberOfSolvedValues();
+	
 	
 
 

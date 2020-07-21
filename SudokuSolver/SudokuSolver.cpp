@@ -15,8 +15,8 @@ int main()
 	test.displayBoard();
 	test.solverLoop();
 	test.displayBoard();
-	test.displayAllPossibleValuesFromAllValues();
-	test.getNumberOfSolvedValues();
+	//test.displayAllPossibleValuesFromAllValues();
+	//test.getNumberOfSolvedValues();
 	
 	
 

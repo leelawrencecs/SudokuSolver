@@ -6,6 +6,8 @@
 
 using namespace std;
 
+//comment test
+
 //loops algorithms for solving puzzle
 void Solver::solverLoop()
 {

@@ -6,9 +6,9 @@
 
 using namespace std;
 
-//comment test
+//comment test 123
 
-//loops algorithms for solving puzzle
+//loops algorithms for narrowing down possibilities
 void Solver::solverLoop()
 {
 	do
@@ -16,11 +16,230 @@ void Solver::solverLoop()
 		hasThereBeenAChangeInAnything = false;
 		updateAllPossibleValues();
 		insertValue();
+		//clearPossibleValuesIfHasValue();
+
 		rowIsolator();
 		colIsolator();
 		boxIsolator();
+		
+		setIfOnlyPossibleValueForBox();
+		setIfOnlyPossibleValueForRow();
+		setIfOnlyPossibleValueForCol();
+
+		
 
 	} while (hasThereBeenAChangeInAnything);
+}
+
+bool Solver::dontExistOnBox(int i, int j, int n)
+{
+	for (int a = i; a < i + 3; a++)
+	{
+		for (int b = j; b < j + 3; b++)
+		{
+			if (board[a][b] == n)
+				return false;
+		}
+	}
+
+	return true;
+}
+
+void Solver::endAllBeAllOne()
+{
+	int arrRow[10];
+	int arrCol[10];
+
+	for (int i = 1; i < 7; i++)
+	{
+		for (int j = 1; j < 7; j++)
+		{
+			for (int n = 1; n < 10; n++)
+			{
+				if (dontExistOnBox(i, j, n))
+				{
+					for (int z = 0; z < 10; z++)
+					{
+						arrRow[z] = 0;
+						arrCol[z] = 0;
+					}
+
+					for (int a = i; a < i + 3; a++)
+					{
+						for (int b = j; b < j + 3; b++)
+						{
+							if (allPossibleValues[a-1][b-1][n-1])
+							{
+								arrRow[a] = a;
+								arrCol[b] = b;
+							}
+						}
+					}
+
+					/*
+					for ()
+
+					{
+						test if all are same
+					}
+					*/
+				}
+			}
+		}
+	}
+
+}
+
+void Solver::totalNumbmerOfPossibleValues()
+{
+	int counter = 0;
+
+	for (int i = 0; i < 9; i++)
+	{
+		for (int j = 0; j < 9; j++)
+		{
+			for (int k = 0; k < 9; k++)
+			{
+				if (allPossibleValues[i][j][k])
+				{
+					counter++;
+				}
+			}
+		}
+	}
+	cout << "total possible values: " << counter << endl;
+}
+
+void Solver::clearPossibleValuesIfHasValue()
+{
+	for (int i = 0; i < 9; i++)
+	{
+		for (int j = 0; j < 9; j++)
+		{
+			if (board[i][j] != 0)
+			{
+				for (int n = 0; n < 9; n++)
+				{
+					if (allPossibleValues[i][j][n])
+					{
+						hasThereBeenAChangeInAnything = true;
+						allPossibleValues[i][j][n] = false;
+					}
+
+					
+					//cout << a << " " << b << " " << n << endl;
+				}
+			}
+
+			
+		}
+	}
+}
+
+void Solver::setIfOnlyPossibleValueForCol()
+{
+	int counter;
+	int theRow, theCol;
+
+	for (int n = 0; n < 9; n++)
+	{
+		counter = 0;
+
+		for (int j = 0; j < 9; j++)
+		{
+			for (int i = 0; i < 9; i++)
+			{
+				if (allPossibleValues[i][j][n])
+				{
+					counter++;
+					theRow = i;
+					theCol = j;
+				}
+			}
+		}
+
+		if (counter == 1)
+		{
+			board[theRow][theCol] = n + 1;
+			hasThereBeenAChangeInAnything = true;
+		}
+
+	}
+
+}
+
+void Solver::setIfOnlyPossibleValueForRow()
+{
+	int counter;
+	int theRow, theCol;
+
+	for (int n = 0; n < 9; n++)
+	{
+		counter = 0;
+
+		for (int i = 0; i < 9; i++)
+		{
+			for (int j = 0; j < 9; j++)
+			{
+				if (allPossibleValues[i][j][n])
+				{
+					counter++;
+					theRow = i;
+					theCol = j;
+				}
+			}
+		}
+
+		if (counter == 1)
+		{
+			board[theRow][theCol] = n + 1;
+			hasThereBeenAChangeInAnything = true;
+		}
+
+	}
+
+}
+
+//this needs to work for all of them
+void Solver::setIfOnlyPossibleValueForBox()
+{
+	int counter;
+	int theRow, theCol;
+
+	for (int n = 0; n < 9; n++)
+	{
+		for (int i = 0; i < 7; i += 3)
+		{
+			for (int j = 0; j < 7; j += 3)
+			{
+				counter = 0;
+
+				for (int a = i; a < i + 3; a++)
+				{
+					for (int b = j; b < j + 3; b++)
+					{
+						if (allPossibleValues[a][b][n])
+						{
+							counter++;
+							theRow = a;
+							theCol = b;
+
+						}
+
+
+					}
+				}
+
+				if (counter == 1)
+				{
+					board[theRow][theCol] = n + 1;
+					hasThereBeenAChangeInAnything = true;
+				}
+
+			}
+		}
+	}
+
 }
 
 //prints out number of solved values. used for testing purposes only
@@ -271,6 +490,24 @@ void Solver::insertValue()
 				board[row][col] = insertIfThereIsOnlyOnePossibleValue(row, col);
 			}
 		}
+	}
+}
+
+void Solver::displayAllPossibleValuesFromCertainRow(int row)
+{
+	for (int col = 0; col < 9; col++)
+	{
+		cout << "For row:" << row << " col:" << col << ", all possible values are: ";
+
+		for (int possibleValues = 0; possibleValues < 9; possibleValues++)
+		{
+			if (allPossibleValues[row][col][possibleValues] == true)
+			{
+				cout << possibleValues + 1 << " ";
+			}
+		}
+
+		cout << endl;
 	}
 }
 

@@ -23,6 +23,7 @@ public:
 	bool doesThisNumberExistInCol(int col, int num);
 	bool doesThisNumberExistInBox(int row, int col, int num);
 	void displayAllPossibleValuesFromAllValues();
+	void displayAllPossibleValuesFromCertainRow(int row);
 	void insertValue();
 	int insertIfThereIsOnlyOnePossibleValue(int row, int col);
 	void rowIsolator();
@@ -31,6 +32,13 @@ public:
 	int getNumberOfPossibleValues(int row, int col);
 	bool doTheseHaveSamePossibleValues(int row, int col, int row2, int col2);
 	void getNumberOfSolvedValues();
+	void setIfOnlyPossibleValueForBox();
+	void setIfOnlyPossibleValueForRow();
+	void setIfOnlyPossibleValueForCol();
+	void clearPossibleValuesIfHasValue();
+	void totalNumbmerOfPossibleValues();
+	void endAllBeAllOne();
+	bool dontExistOnBox(int i, int j, int n);
 
 
 };

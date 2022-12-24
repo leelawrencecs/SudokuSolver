@@ -31,6 +31,7 @@ void Solver::solverLoop()
 	} while (hasThereBeenAChangeInAnything);
 }
 
+//only works if parameters are the coordinates for top left of a box
 bool Solver::dontExistOnBox(int i, int j, int n)
 {
 	for (int a = i; a < i + 3; a++)
@@ -47,46 +48,98 @@ bool Solver::dontExistOnBox(int i, int j, int n)
 
 void Solver::endAllBeAllOne()
 {
-	int arrRow[10];
-	int arrCol[10];
+	int inBox[9][9];
 
-	for (int i = 1; i < 7; i++)
+	for (int i = 0; i < 7; i += 3)
 	{
-		for (int j = 1; j < 7; j++)
+		for (int j = 0; j < 7; j += 3)
 		{
 			for (int n = 1; n < 10; n++)
 			{
 				if (dontExistOnBox(i, j, n))
 				{
-					for (int z = 0; z < 10; z++)
+					for (int y = 0; y < 9; y++)
 					{
-						arrRow[z] = 0;
-						arrCol[z] = 0;
+						for (int z = 0; z < 9; z++)
+						{
+							inBox[y][z] = 0;
+						}
 					}
 
-					for (int a = i; a < i + 3; a++)
+					for (int k = i; k < i + 3; k++)
 					{
-						for (int b = j; b < j + 3; b++)
+						for (int l = j; l < j + 3; l++)
 						{
-							if (allPossibleValues[a-1][b-1][n-1])
+							if (allPossibleValues[k][l][n])
 							{
-								arrRow[a] = a;
-								arrCol[b] = b;
+								inBox[k][l] = n;
+							}
+						}
+
+					}
+
+					int counter = 0;
+
+					for (int u = 0; u < 9; u++)
+					{
+						for (int p = 0; p < 9; p++)
+						{
+							if (inBox[u][p] == n)
+							{
+								counter++;
+								break;
 							}
 						}
 					}
 
-					/*
-					for ()
-
+					if (counter == 1)
 					{
-						test if all are same
+						//isolate the other boxes
+
+						for (int r = 0; r < 9; r++)
+						{
+							if (true)
+							{
+
+							}
+						}
+
 					}
-					*/
+
+					int counter2 = 0;
+
+					for (int u = 0; u < 9; u++)
+					{
+						for (int p = 0; p < 9; p++)
+						{
+							if (inBox[p][u] == n)
+							{
+								counter2++;
+								break;
+							}
+						}
+					}
+
+					if (counter2 == 1)
+					{
+						//isolate the other boxes
+					}
+
+					//code here to check if inbox is all the same for every row or every column, if not 0 and not n, break
+					//make sure it only exists in one row or one column
+
+
+
+
 				}
 			}
 		}
 	}
+
+
+
+	
+	
 
 }
 

@@ -21,6 +21,7 @@ int main()
 	//test.displayAllPossibleValuesFromAllValues();
 	test.getNumberOfSolvedValues();
 	test.totalNumbmerOfPossibleValues();
+	test.endAllBeAllOne();
 
 	
 
